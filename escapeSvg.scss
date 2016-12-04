@@ -1,0 +1,56 @@
+// 除了 0~9, a~z, A~Z, -.之外的符号的 16进制对照表
+$asciiHexMap: (
+	"	": "%09",
+	" ": "%20",
+	"!": "%21",
+	"\"": "%22",
+	"#": "%23",
+	"$": "%24",
+	"%": "%25",
+	"&": "%26",
+	"'": "%27",
+	"(": "%28",
+	")": "%29",
+	"*": "%2a",
+	"+": "%2b",
+	",": "%2c",
+	"-": "%2d",
+	".": "%2e",
+	"/": "%2f",
+	":": "%3a",
+	";": "%3b",
+	"<": "%3c",
+	"=": "%3d",
+	">": "%3e",
+	"?": "%3f",
+	"@": "%40",
+	"[": "%5b",
+	"\\": "%5c",
+	"]": "%5d",
+	"^": "%5e",
+	"_": "%5f",
+	"`": "%60",
+	"{": "%7b",
+	"|": "%7c",
+	"}": "%7d",
+	"~": "%7e",
+	"": "%7f"
+);
+
+@function getHexCode($ascii) {
+	$hex: map-get($asciiHexMap, $ascii);
+	@if(null == $hex) {
+		$hex: $ascii; // 表示是 0~9, a~z, A~Z, -. 原样返回
+	}
+	@return $hex;
+}
+
+// 将svg字符串转换成 URL 编码
+@function escapeSvg ($svg: '') {
+	$url: 'data:image/svg+xml;charset=utf-8,';
+	$str_len: str_length($svg);
+	@for $i from 1 through $str_len {
+		$url: $url + getHexCode(str_slice($svg, $i, $i));
+	}
+	@return $url;
+}
