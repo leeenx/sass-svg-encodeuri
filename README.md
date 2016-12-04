@@ -4,8 +4,9 @@
 
 # escapeSvg 的用法
 
+语法如下
 ```scss
-	escapeSvg(string);
+escapeSvg($string);
 ```
 
 具体实例如下：
