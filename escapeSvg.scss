@@ -38,6 +38,12 @@ $asciiHexMap: (
 );
 
 @function getHexCode($ascii) {
+	$n: '
+';
+	@if($n == $ascii) {
+		// 换行
+		$ascii: ""; // 当成空格
+	}
 	$hex: map-get($asciiHexMap, $ascii);
 	@if(null == $hex) {
 		$hex: $ascii; // 表示是 0~9, a~z, A~Z, -. 原样返回
